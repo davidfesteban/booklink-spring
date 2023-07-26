@@ -1,0 +1,7 @@
+{
+  "name": "Jan Doe",
+  "email": "jan@test.com",
+  "password": "testpass",
+  "organizations": [],
+  "adminOrganizations": []
+}

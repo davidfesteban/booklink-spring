@@ -1,0 +1,8 @@
+{
+  "materialName": "Book",
+  "description": "Java Programming",
+  "price": "$19.99",
+  "timestampWhen": 1648999200000,
+  "userEmail": "johndoe@example.com"
+}
+

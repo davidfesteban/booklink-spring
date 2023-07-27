@@ -15,7 +15,12 @@ public record WorkingHours(LocalTime workStartHour, LocalTime workStopHour, Loca
         return objectMapper.readValue(jsonString, WorkingHours.class);
     }
 
-    public String toJsonString() throws JsonProcessingException {
-        return objectMapper.writeValueAsString(this);
+    @Override
+    public String toString() {
+        try {
+            return objectMapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

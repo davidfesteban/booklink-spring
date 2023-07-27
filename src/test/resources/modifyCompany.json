@@ -1,0 +1,253 @@
+{
+  "subdomain": "my-business",
+  "name": "My NEW Name",
+  "address": "123 Main Street",
+  "email": "contact@example.com",
+  "phone": "123-456-7890",
+  "slotDurationByServices": {
+    "HAIRCUT": 60,
+    "MASSAGE": 80
+  },
+  "workingHoursByDay": {
+    "MONDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "TUESDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "WEDNESDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "THURSDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "FRIDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "SATURDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "SUNDAY": {
+      "workStartHour": {
+        "hour": 9,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 17,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      }
+    }
+  },
+  "slotOwners": [
+    "John Doe",
+    "Jane Smith"
+  ],
+  "specialWorkingDays": {
+    "2023-07-31": {
+      "workStartHour": {
+        "hour": 9,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 16,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "2023-08-15": {
+      "workStartHour": {
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    }
+  }
+}

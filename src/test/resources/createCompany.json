@@ -1,0 +1,73 @@
+{
+  "subdomain": "my-business",
+  "name": "My Business Name",
+  "address": "123 Main Street",
+  "email": "contact@example.com",
+  "phone": "123-456-7890",
+  "slotDurationByServices": {
+    "HAIRCUT": 60,
+    "MASSAGE": 80
+  },
+  "workingHoursByDay": {
+    "MONDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    },
+    "TUESDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    },
+    "WEDNESDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    },
+    "THURSDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    },
+    "FRIDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    },
+    "SATURDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    },
+    "SUNDAY": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    }
+  },
+  "slotOwners": [
+    "COURT1",
+    "COURT2"
+  ],
+  "specialWorkingDays": {
+    "2023-07-31": {
+      "workStartHour": "09:00:00",
+      "workStopHour": "16:00:00",
+      "breakStartHour": "12:30:00",
+      "breakStopHour": "13:30:00"
+    },
+    "2023-08-01": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    }
+  }
+}

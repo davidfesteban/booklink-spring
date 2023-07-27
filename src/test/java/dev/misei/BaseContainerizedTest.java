@@ -1,6 +1,8 @@
-package es.misei.everi;
+package dev.misei;
 
-import es.misei.everi.repository.*;
+import dev.misei.repository.AppointmentRepository;
+import dev.misei.repository.AuthRepository;
+import dev.misei.repository.BusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -11,26 +13,17 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-@SpringBootTest
+//@SpringBootTest
 public class BaseContainerizedTest {
-
-    @Autowired
-    private MaterialRepository materialRepository;
-
-    @Autowired
-    private OrganizationRepository organizationRepository;
-
-    @Autowired
-    AuthRepository authRepository;
-
-    @Autowired
-    private BillingRepository billingRepository;
-
-    @Autowired
-    private ProjectRepository projectRepository;
 
     @Container
     static MySQLContainer mySQLContainer = new MySQLContainer<>(DockerImageName.parse("mysql:8.0.32"));
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
+    private BusinessRepository businessRepository;
+    @Autowired
+    private AuthRepository authRepository;
 
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {

@@ -1,27 +1,10 @@
-package es.misei.everi;
+package dev.misei;
 
-import es.misei.everi.application.OrganizationProcessor;
-import es.misei.everi.repository.AuthRepository;
-import es.misei.everi.repository.MaterialRepository;
-import es.misei.everi.repository.OrganizationRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class EveriDBIntegrationTest {
-
-    @Autowired
-    private OrganizationProcessor organizationProcessor;
-
-    @Autowired
-    private MaterialRepository materialRepository;
-
-    @Autowired
-    private OrganizationRepository organizationRepository;
-
-    @Autowired
-    private AuthRepository authRepository;
 
     @Test
     void happyPath() {

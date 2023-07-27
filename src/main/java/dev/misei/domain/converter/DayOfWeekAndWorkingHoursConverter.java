@@ -2,18 +2,19 @@ package dev.misei.domain.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.misei.domain.entity.WorkingHours;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
 import java.time.DayOfWeek;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import static dev.misei.domain.entity.WorkingHours.objectMapper;
 
 @Converter
 public class DayOfWeekAndWorkingHoursConverter implements AttributeConverter<Map<DayOfWeek, WorkingHours>, String> {
+
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public String convertToDatabaseColumn(Map<DayOfWeek, WorkingHours> attribute) {
@@ -27,7 +28,8 @@ public class DayOfWeekAndWorkingHoursConverter implements AttributeConverter<Map
     @Override
     public Map<DayOfWeek, WorkingHours> convertToEntityAttribute(String dbData) {
         try {
-            return objectMapper.readValue(dbData, new TypeReference<Map<DayOfWeek, WorkingHours>>() {});
+            return objectMapper.readValue(dbData, new TypeReference<Map<DayOfWeek, WorkingHours>>() {
+            });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

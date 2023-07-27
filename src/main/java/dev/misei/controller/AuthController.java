@@ -2,6 +2,7 @@ package dev.misei.controller;
 
 import dev.misei.config.jwt.JwtTokenProvider;
 import dev.misei.domain.mapper.JoinToUserMapper;
+import dev.misei.domain.payload.user.SimpleUserPayload;
 import dev.misei.domain.payload.user.UserPayload;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.TokenRepository;
@@ -13,10 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -29,18 +27,19 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
     private JwtTokenProvider tokenProvider;
 
-    @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody UserPayload payload) {
+    @GetMapping("/login")
+    public ResponseEntity<String> authenticateUser(String email, String password) {
         try {
+            //TODO: Send password as encrypted from frontend
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    payload.getEmail(), payload.getPassword()));
+                    email, password));
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            var savedToken = tokenRepository.retrieveGeneratedToken(payload.getEmail());
+            var savedToken = tokenRepository.retrieveGeneratedToken(email);
 
             if (savedToken.isEmpty() || !tokenProvider.validateToken(savedToken.get())) {
-                String token = tokenProvider.generateToken(payload.getEmail(), payload.getPassword());
-                tokenRepository.saveOverrideGeneratedToken(payload.getEmail(), token);
+                String token = tokenProvider.generateToken(email, password);
+                tokenRepository.saveOverrideGeneratedToken(email, token);
                 return ResponseEntity.ok(token);
             }
             return ResponseEntity.ok(savedToken.get());
@@ -50,7 +49,7 @@ public class AuthController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<?> registerUser(@RequestBody UserPayload payload) {
+    public ResponseEntity<?> registerUser(@RequestBody SimpleUserPayload payload) {
 
         if (authRepository.existsByEmail(payload.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);

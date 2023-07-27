@@ -1,0 +1,213 @@
+{
+  "subdomain": "my-other-business",
+  "name": "My Business Name",
+  "address": "123 Main Street",
+  "email": "contact@business.com",
+  "phone": "123-456-7890",
+  "slotDurationByServices": {
+    "HAIRCUT": 60,
+    "MASSAGE": 80
+  },
+  "workingHoursByDay": {
+    "MONDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "TUESDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "WEDNESDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "THURSDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "FRIDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "SATURDAY": {
+      "workStartHour": {
+        "hour": 8,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 18,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "SUNDAY": {
+      "workStartHour": {
+        "hour": 9,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "workStopHour": {
+        "hour": 17,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStartHour": {
+        "hour": 12,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      },
+      "breakStopHour": {
+        "hour": 13,
+        "minute": 30,
+        "second": 0,
+        "nano": 0
+      }
+    }
+  },
+  "slotOwners": [
+    "PISTA1",
+    "PISTA2"
+  ],
+  "specialWorkingDays": {
+    "2023-07-31": {
+      "workStartHour": "09:00:00",
+      "workStopHour": "16:00:00",
+      "breakStartHour": "12:30:00",
+      "breakStopHour": "13:30:00"
+    },
+    "2023-08-01": {
+      "workStartHour": "08:30:00",
+      "workStopHour": "17:30:00",
+      "breakStartHour": "12:00:00",
+      "breakStopHour": "13:00:00"
+    }
+  }
+}

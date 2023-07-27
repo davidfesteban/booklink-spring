@@ -12,4 +12,10 @@ public interface AppointmentMapper {
     Appointment toEntity(AppointmentPayload payload);
 
     AppointmentPayload toPayload(Appointment entity);
+
+    default AppointmentPayload toPayloadNoSensitive(Appointment entity) {
+        var result = toPayload(entity);
+        result.getUser().setPassword("");
+        return result;
+    }
 }

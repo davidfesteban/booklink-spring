@@ -30,7 +30,7 @@ public class AppointmentProcessor {
 
     //TODO: Too much cases on early return. Appointment mapping should be at the end to avoid modifications in the middle
     @Transactional
-    public ActionResult<AppointmentPayload> createAppointment(String domain, SimpleAppointmentPayload simpleAppointmentPayload, String userEmail) {
+    public ActionResult<SimpleAppointmentPayload> createAppointment(String domain, SimpleAppointmentPayload simpleAppointmentPayload, String userEmail) {
         var user = authRepository.findByEmail(userEmail);
         var business = businessRepository.findBySubdomainIgnoreCase(domain);
 
@@ -66,7 +66,7 @@ public class AppointmentProcessor {
             appointment.addBusiness(business.get());
             appointment.addUser(user.get());
 
-            return ActionResult.TRUE(appointmentMapper.toPayload(appointmentRepository.saveAndFlush(appointment)));
+            return ActionResult.TRUE(simpleAppointmentMapper.toPayload(appointmentRepository.saveAndFlush(appointment)));
         }
 
         return ActionResult.FALSE("Appointment is not within current business working hours");
@@ -81,7 +81,7 @@ public class AppointmentProcessor {
         }
 
         var appointments = appointmentRepository.findByUser_EmailIgnoreCase(userEmail);
-        return ActionResult.TRUE(appointments.stream().map(appointmentMapper::toPayload).toList());
+        return ActionResult.TRUE(appointments.stream().map(appointmentMapper::toPayloadNoSensitive).toList());
     }
 
     public ActionResult<AppointmentPayload> removeAppointment(Long id, String userEmail) {

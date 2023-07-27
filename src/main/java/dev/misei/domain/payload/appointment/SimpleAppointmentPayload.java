@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SimpleAppointmentPayload {
-    private Long id;
-
     private String slotOwner;
     private LocalDateTime slotStartAppointment;
     private Long slotDuration;

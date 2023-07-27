@@ -25,7 +25,7 @@ public class BusinessProcessor {
     private AuthRepository authRepository;
 
     @Transactional
-    public ActionResult<BusinessPayload> createBusiness(SimpleBusinessPayload businessPayload, String userEmail) {
+    public ActionResult<SimpleBusinessPayload> createBusiness(SimpleBusinessPayload businessPayload, String userEmail) {
         var admin = authRepository.findByEmail(userEmail);
 
         if (admin.isEmpty()) {
@@ -43,14 +43,14 @@ public class BusinessProcessor {
         var business = simpleBusinessMapper.toEntity(businessPayload);
         business.addAdmin(admin.get());
 
-        return ActionResult.TRUE(businessMapper.toPayload(businessRepository.saveAndFlush(business)));
+        return ActionResult.TRUE(simpleBusinessMapper.toPayload(businessRepository.saveAndFlush(business)));
     }
 
     @Transactional
     public ActionResult<BusinessPayload> findBusiness(String domain) {
 
         if (businessRepository.existsBySubdomainIgnoreCase(domain)) {
-            return ActionResult.TRUE(businessMapper.toPayload(businessRepository.findBySubdomainIgnoreCase(domain).get()));
+            return ActionResult.TRUE(businessMapper.toPayloadNoSensitive(businessRepository.findBySubdomainIgnoreCase(domain).get()));
         }
 
         return ActionResult.FALSE("Not found");
@@ -76,7 +76,7 @@ public class BusinessProcessor {
         business.addAdmin(admin.get());
 
         // TODO: Improve. This is not ok. We should compare current entity with new one and merge and then, merge the original one with the entity manager
-        return ActionResult.TRUE(businessMapper.toPayload(businessRepository.saveAndFlush(business)));
+        return ActionResult.TRUE(businessMapper.toPayloadNoSensitive(businessRepository.saveAndFlush(business)));
     }
 
     //TODO: Remove appointment

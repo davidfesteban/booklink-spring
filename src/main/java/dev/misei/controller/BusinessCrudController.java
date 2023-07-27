@@ -20,7 +20,7 @@ public class BusinessCrudController extends BaseCrudController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<BusinessPayload> createBusiness(@RequestBody SimpleBusinessPayload organizationPayload, @RequestHeader("Authorization") String tokenRequest) {
+    public ResponseEntity<SimpleBusinessPayload> createBusiness(@RequestBody SimpleBusinessPayload organizationPayload, @RequestHeader("Authorization") String tokenRequest) {
         return perform(userEmail -> businessProcessor.createBusiness(organizationPayload, userEmail), tokenRequest);
     }
 

@@ -25,7 +25,13 @@ public class AppointmentCrudController extends BaseCrudController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<AppointmentPayload> createAppointment(@RequestHeader("Host") String domain, @RequestBody SimpleAppointmentPayload simpleAppointmentPayload, @RequestHeader("Authorization") String tokenRequest) {
+    public ResponseEntity<SimpleAppointmentPayload> createAppointment(@RequestHeader("Host") String domain, @RequestBody SimpleAppointmentPayload simpleAppointmentPayload, @RequestHeader("Authorization") String tokenRequest) {
+        return perform(userEmail -> appointmentProcessor.createAppointment(processDomain(domain), simpleAppointmentPayload, userEmail), tokenRequest);
+    }
+
+    @PostMapping("/createByBusiness")
+    public ResponseEntity<SimpleAppointmentPayload> createAppointmentByBusiness(@RequestHeader("Host") String domain, @RequestBody SimpleAppointmentPayload simpleAppointmentPayload, @RequestHeader("Authorization") String tokenRequest) {
+        //TODO: Implement
         return perform(userEmail -> appointmentProcessor.createAppointment(processDomain(domain), simpleAppointmentPayload, userEmail), tokenRequest);
     }
 

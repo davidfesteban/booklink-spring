@@ -1,4 +1,4 @@
-package dev.misei.domain.payload.appointment;
+package dev.misei.domain.payload;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +9,15 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SimpleAppointmentPayload {
+public class AppointmentPayload {
+    //Ignored on in
+    private String id;
     private String slotOwner;
     private LocalDateTime slotStartAppointment;
+    //Minutes
     private Long slotDuration;
     private String slotService;
+
+    private String manualBookingInfoByAdmin;
+    private String manualBookingInviteToJoin;
 }

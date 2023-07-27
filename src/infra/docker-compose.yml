@@ -1,26 +1,26 @@
-# Use root/example as user/password credentials
 version: '3.1'
 
 services:
-  db:
-    image: mysql:8.0.32
-    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
-    # (this is just an example, not intended to be a production configuration)
-    command: --default-authentication-plugin=mysql_native_password
+  mongo:
+    image: mongo:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
     ports:
-      - "3306:3306"
-    expose:
-      - "3306"
+      - "27017:27017"
     volumes:
-      - my-db:/tmp/everi/mysql
-  adminer:
-    image: adminer
+      - my-mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
     restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
     ports:
-      - 9010:8080
+      - "8081:8081"
 
 volumes:
-  my-db:
+  my-mongo-data:
+

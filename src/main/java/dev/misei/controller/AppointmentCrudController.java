@@ -1,17 +1,11 @@
 package dev.misei.controller;
 
 import dev.misei.application.AppointmentProcessor;
-import dev.misei.application.BusinessProcessor;
 import dev.misei.config.jwt.JwtTokenProvider;
-import dev.misei.domain.payload.appointment.AppointmentPayload;
-import dev.misei.domain.payload.appointment.SimpleAppointmentPayload;
-import dev.misei.domain.payload.business.BusinessPayload;
-import dev.misei.domain.payload.business.SimpleBusinessPayload;
-import org.springframework.http.HttpStatus;
+import dev.misei.domain.payload.AppointmentPayload;
+import dev.misei.repository.AuthRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/private/appointment")
@@ -19,29 +13,23 @@ public class AppointmentCrudController extends BaseCrudController {
 
     private final AppointmentProcessor appointmentProcessor;
 
-    public AppointmentCrudController(JwtTokenProvider jwtTokenProvider, AppointmentProcessor appointmentProcessor) {
-        super(jwtTokenProvider);
+    public AppointmentCrudController(JwtTokenProvider jwtTokenProvider, AuthRepository authRepository, AppointmentProcessor appointmentProcessor) {
+        super(jwtTokenProvider, authRepository);
         this.appointmentProcessor = appointmentProcessor;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<SimpleAppointmentPayload> createAppointment(@RequestHeader("Host") String domain, @RequestBody SimpleAppointmentPayload simpleAppointmentPayload, @RequestHeader("Authorization") String tokenRequest) {
-        return perform(userEmail -> appointmentProcessor.createAppointment(processDomain(domain), simpleAppointmentPayload, userEmail), tokenRequest);
+    public ResponseEntity<AppointmentPayload> createAppointment(@RequestHeader("Host") String domain, @RequestBody AppointmentPayload appointmentPayload, @RequestHeader("Authorization") String tokenRequest) {
+        return perform(userEmail -> appointmentProcessor.createAppointment(processDomain(domain), appointmentPayload, userEmail), tokenRequest);
     }
 
-    @PostMapping("/createByBusiness")
-    public ResponseEntity<SimpleAppointmentPayload> createAppointmentByBusiness(@RequestHeader("Host") String domain, @RequestBody SimpleAppointmentPayload simpleAppointmentPayload, @RequestHeader("Authorization") String tokenRequest) {
-        //TODO: Implement
-        return perform(userEmail -> appointmentProcessor.createAppointment(processDomain(domain), simpleAppointmentPayload, userEmail), tokenRequest);
-    }
-
-    @GetMapping("/appointments")
+    /*@GetMapping("/appointments")
     public ResponseEntity<List<AppointmentPayload>> findMyAppointments(@RequestHeader("Authorization") String tokenRequest) {
         return perform(appointmentProcessor::findMyAppointments, tokenRequest);
-    }
+    }*/
 
-    @PostMapping("/remove")
+    /*@PostMapping("/remove")
     public ResponseEntity<AppointmentPayload> removeAppointment(Long id, @RequestHeader("Authorization") String tokenRequest) {
         return perform(userEmail -> appointmentProcessor.removeAppointment(id, userEmail), tokenRequest);
-    }
+    }*/
 }

@@ -2,8 +2,7 @@ package dev.misei.controller;
 
 import dev.misei.config.jwt.JwtTokenProvider;
 import dev.misei.domain.mapper.JoinToUserMapper;
-import dev.misei.domain.payload.user.SimpleUserPayload;
-import dev.misei.domain.payload.user.UserPayload;
+import dev.misei.domain.payload.UserPayload;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.TokenRepository;
 import lombok.AllArgsConstructor;
@@ -49,14 +48,14 @@ public class AuthController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<?> registerUser(@RequestBody SimpleUserPayload payload) {
+    public ResponseEntity<?> registerUser(@RequestBody UserPayload userPayload) {
 
-        if (authRepository.existsByEmail(payload.getEmail())) {
+        if (authRepository.existsByEmail(userPayload.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
 
         try {
-            authRepository.saveAndFlush(new JoinToUserMapper(passwordEncoder).apply(payload));
+            authRepository.save(new JoinToUserMapper(passwordEncoder).apply(userPayload));
         } catch (Exception e) {
             return new ResponseEntity<>("Error on signup!", HttpStatus.BAD_REQUEST);
         }

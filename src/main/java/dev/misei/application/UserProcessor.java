@@ -1,33 +1,22 @@
 package dev.misei.application;
 
-import dev.misei.domain.mapper.user.UserMapper;
-import dev.misei.domain.payload.user.UserPayload;
+import dev.misei.domain.entity.User;
+import dev.misei.domain.mapper.UserMapper;
+import dev.misei.domain.payload.UserPayload;
+import dev.misei.repository.AppointmentRepository;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.BusinessRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
-public class UserProcessor {
-    private final UserMapper userMapper;
-    @PersistenceContext
-    private EntityManager entityManager;
-    private BusinessRepository businessRepository;
-    private AuthRepository authRepository;
+public class UserProcessor extends BaseProcessor {
 
-    @Transactional
-    public UserPayload findByEmail(String email) {
-        var user = authRepository.findByEmail(email);
+    public UserProcessor(BusinessRepository businessRepository, AppointmentRepository appointmentRepository, AuthRepository authRepository) {
+        super(businessRepository, appointmentRepository, authRepository);
+    }
 
-        if (user.isPresent()) {
-            return userMapper.toPayload(user.get());
-        }
-
-        return new UserPayload();
+    public UserPayload findDetails(User user) {
+        return UserMapper.INSTANCE.toPayload(user);
     }
 
 }

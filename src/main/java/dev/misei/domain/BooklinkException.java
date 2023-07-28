@@ -15,7 +15,9 @@ public class BooklinkException extends RuntimeException {
         MORE_THAN_ONE_BUSINESS("At the moment is not possible to have more than one business"),
         ALREADY_TAKEN_SUBDOMAIN("This subdomain is already taken"),
         UNKNOWN_SUBDOMAIN("This subdomain is not registered"),
-        USER_NOT_ADMIN("The user is not a business administrator");
+        USER_NOT_ADMIN("The user is not a business administrator"),
+        APPOINTMENT_ID_NOT_FOUND("The ID is not matching with any appointment"),
+        USER_FOR_APPOINTMENT_NOT_FOUND("The user has not been found for the appointment id");
 
         private final String message;
 

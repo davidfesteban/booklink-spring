@@ -8,10 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface AuthRepository extends MongoRepository<User, String> {
+    Optional<User> findByAppointments_Id(String id);
 
     Optional<User> findByEmail(String email);
-
-
 
     Boolean existsByEmail(String email);
 

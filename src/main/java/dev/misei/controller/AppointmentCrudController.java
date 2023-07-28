@@ -23,13 +23,8 @@ public class AppointmentCrudController extends BaseCrudController {
         return perform(userEmail -> appointmentProcessor.createAppointment(processDomain(domain), appointmentPayload, userEmail), tokenRequest);
     }
 
-    /*@GetMapping("/appointments")
-    public ResponseEntity<List<AppointmentPayload>> findMyAppointments(@RequestHeader("Authorization") String tokenRequest) {
-        return perform(appointmentProcessor::findMyAppointments, tokenRequest);
-    }*/
-
-    /*@PostMapping("/remove")
-    public ResponseEntity<AppointmentPayload> removeAppointment(Long id, @RequestHeader("Authorization") String tokenRequest) {
-        return perform(userEmail -> appointmentProcessor.removeAppointment(id, userEmail), tokenRequest);
-    }*/
+    @GetMapping("/remove")
+    public ResponseEntity<AppointmentPayload> removeAppointment(String id, @RequestHeader("Authorization") String tokenRequest) {
+        return perform(user -> appointmentProcessor.removeAppointment(id, user), tokenRequest);
+    }
 }

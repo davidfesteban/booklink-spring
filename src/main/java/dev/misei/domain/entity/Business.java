@@ -40,6 +40,12 @@ public class Business {
         appointments.add(appointment);
     }
 
+    public void removeAppointment(Appointment appointment) {
+        if (appointments != null && !appointments.isEmpty()) {
+            appointments.remove(appointment);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         return (o instanceof Business that) && this.subdomain.equalsIgnoreCase(that.subdomain);

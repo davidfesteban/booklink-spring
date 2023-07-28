@@ -21,9 +21,8 @@ public class UserCrudController extends BaseCrudController {
         this.userProcessor = userProcessor;
     }
 
-    @GetMapping("/findUserByEmail")
-    public ResponseEntity<UserPayload> findUserByEmail(@RequestHeader("Authorization") String tokenRequest) {
+    @GetMapping("/findDetails")
+    public ResponseEntity<UserPayload> findDetails(@RequestHeader("Authorization") String tokenRequest) {
         return perform(userProcessor::findDetails, tokenRequest);
     }
-
 }

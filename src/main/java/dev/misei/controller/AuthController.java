@@ -1,10 +1,13 @@
 package dev.misei.controller;
 
+import dev.misei.application.MailService;
 import dev.misei.config.jwt.JwtTokenProvider;
 import dev.misei.domain.mapper.JoinToUserMapper;
+import dev.misei.domain.mapper.UserMapper;
 import dev.misei.domain.payload.UserPayload;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.TokenRepository;
+import dev.misei.repository.UserInMemoryWaiting;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/public/auth")
@@ -22,9 +27,11 @@ public class AuthController {
 
     private AuthenticationManager authenticationManager;
     private TokenRepository tokenRepository;
+    private UserInMemoryWaiting userInMemoryWaiting;
     private AuthRepository authRepository;
     private PasswordEncoder passwordEncoder;
     private JwtTokenProvider tokenProvider;
+    private MailService mailService;
 
     @GetMapping("/login")
     public ResponseEntity<String> authenticateUser(String email, String password) {
@@ -47,6 +54,18 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/confirm")
+    public ResponseEntity<?> confirmUser(String uuid) {
+        try {
+            var user = userInMemoryWaiting.confirm(UUID.fromString(uuid));
+            authRepository.save(new JoinToUserMapper(passwordEncoder).apply(user));
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error on signup!", HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+    }
+
     @PostMapping("/join")
     public ResponseEntity<?> registerUser(@RequestBody UserPayload userPayload) {
 
@@ -55,7 +74,9 @@ public class AuthController {
         }
 
         try {
-            authRepository.save(new JoinToUserMapper(passwordEncoder).apply(userPayload));
+            var confirmationToken = userInMemoryWaiting.sendConfirmation(userPayload);
+            mailService.sendConfirmationMessage(userPayload.getEmail(),
+                    "http://localhost:8080/api/public/auth/confirm?uuid=" + confirmationToken.toString());
         } catch (Exception e) {
             return new ResponseEntity<>("Error on signup!", HttpStatus.BAD_REQUEST);
         }

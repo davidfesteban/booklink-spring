@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 @Service
 public class AppointmentProcessor extends BaseProcessor {
@@ -48,6 +49,25 @@ public class AppointmentProcessor extends BaseProcessor {
         return AppointmentMapper.INSTANCE.toPayload(appointmentRepository.save(appointment));
     }
 
+    public AppointmentPayload removeAppointment(String id, User user) {
+        var business = businessRepository.findByAppointments_IdIgnoreCase(id).orElseThrow(BooklinkException.Type.BUSINESS_NOT_FOUND::boom);
+        var appointment = appointmentRepository.findById(id).orElseThrow(BooklinkException.Type.APPOINTMENT_ID_NOT_FOUND::boom);
+        var userRegistered = authRepository.findByAppointments_Id(id).orElseThrow(BooklinkException.Type.USER_FOR_APPOINTMENT_NOT_FOUND::boom);
+
+        if(!userRegistered.getEmail().equalsIgnoreCase(user.getEmail()) || user.getBusiness() == null || !user.getBusiness().getSubdomain().equalsIgnoreCase(business.getSubdomain())) {
+            throw BooklinkException.Type.USER_NOT_ADMIN.boom();
+        }
+
+        business.removeAppointment(appointment);
+        userRegistered.removeAppointment(appointment);
+
+        appointmentRepository.delete(appointment);
+        businessRepository.save(business);
+        authRepository.save(userRegistered);
+
+        return AppointmentMapper.INSTANCE.toPayload(appointment);
+    }
+
 
     private boolean isAppointmentWithinWorkingHours(Appointment that, WorkingHours workingHours) {
         return (workingHours.workStartHour().isBefore(that.getSlotStartAppointment().toLocalTime()) &&
@@ -55,4 +75,6 @@ public class AppointmentProcessor extends BaseProcessor {
                 (workingHours.breakStopHour().isBefore(that.getSlotStartAppointment().toLocalTime()) &&
                         workingHours.workStopHour().isAfter(that.getSlotStartAppointment().toLocalTime().plus(that.getSlotDuration(), ChronoUnit.MINUTES)));
     }
+
+
 }

@@ -1,5 +1,6 @@
 package dev.misei;
 
+import dev.misei.application.MailService;
 import dev.misei.config.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,14 @@ public class BooklinkSystemTest extends BaseContainerizedTest {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private MailService mailService;
+
+    @Test
+    void emailSend() {
+        mailService.sendConfirmationMessage("david@misei.dev", "Esto es un test");
+    }
 
     @Test
     void simpleAdminAndUserAndAppointment() throws Exception {

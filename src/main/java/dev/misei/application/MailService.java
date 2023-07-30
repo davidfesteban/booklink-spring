@@ -1,6 +1,6 @@
 package dev.misei.application;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -8,12 +8,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MailService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-    @Value("api.sendgrid")
+    @Value("${api.sendgrid}")
     private String sendGridKey;
 
     public void sendConfirmationMessage(String to, String text) {

@@ -1,6 +1,7 @@
 package dev.misei.application;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -12,10 +13,13 @@ public class MailService {
 
     private RestTemplate restTemplate;
 
+    @Value("api.sendgrid")
+    private String sendGridKey;
+
     public void sendConfirmationMessage(String to, String text) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer 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");
+        headers.add("Authorization", "Bearer " + sendGridKey);
 
         var builder = UriComponentsBuilder.fromHttpUrl("https://api.sendgrid.com/v3/mail/send");
         // Create the JSON payload for the email

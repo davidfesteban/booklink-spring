@@ -6,7 +6,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.test.context.ActiveProfiles;
 
 @TestComponent
-@ActiveProfiles("test")
 public class TestData {
     @Value("classpath:joinDavid.json")
     Resource joinDavid;

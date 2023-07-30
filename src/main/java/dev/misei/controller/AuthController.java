@@ -3,7 +3,6 @@ package dev.misei.controller;
 import dev.misei.application.MailService;
 import dev.misei.config.jwt.JwtTokenProvider;
 import dev.misei.domain.mapper.JoinToUserMapper;
-import dev.misei.domain.mapper.UserMapper;
 import dev.misei.domain.payload.UserPayload;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.TokenRepository;

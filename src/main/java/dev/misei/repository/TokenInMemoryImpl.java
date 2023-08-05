@@ -9,12 +9,12 @@ import java.util.Optional;
 @Repository
 public class TokenInMemoryImpl implements TokenRepository {
 
-    //Token, Email
+    //Email, Token
     private final Map<String, String> inMemoryData = new HashMap<>();
 
     @Override
     public boolean saveOverrideGeneratedToken(String email, String token) {
-        inMemoryData.put(token, email);
+        inMemoryData.put(email, token);
         return true;
     }
 

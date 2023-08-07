@@ -1,5 +1,7 @@
 package dev.misei.domain;
 
+import java.util.function.Supplier;
+
 public class BooklinkException extends RuntimeException {
     public BooklinkException(String message) {
         super(message);
@@ -17,7 +19,8 @@ public class BooklinkException extends RuntimeException {
         UNKNOWN_SUBDOMAIN("This subdomain is not registered"),
         USER_NOT_ADMIN("The user is not a business administrator"),
         APPOINTMENT_ID_NOT_FOUND("The ID is not matching with any appointment"),
-        USER_FOR_APPOINTMENT_NOT_FOUND("The user has not been found for the appointment id");
+        USER_FOR_APPOINTMENT_NOT_FOUND("The user has not been found for the appointment id"),
+        ID_MISMATCH("The current id does not belong to a valid business that matches with the user");
 
         private final String message;
 

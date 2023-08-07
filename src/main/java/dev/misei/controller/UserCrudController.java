@@ -25,4 +25,9 @@ public class UserCrudController extends BaseCrudController {
     public ResponseEntity<UserPayload> findDetails(@RequestHeader("Authorization") String tokenRequest) {
         return perform(userProcessor::findDetails, tokenRequest);
     }
+
+    @GetMapping("/findDetailsByAppointmentId")
+    public ResponseEntity<UserPayload> findDetailsByAppointmentId(String id, @RequestHeader("Authorization") String tokenRequest) {
+        return perform(user -> userProcessor.findDetailsByAppointmentId(id, user), tokenRequest);
+    }
 }

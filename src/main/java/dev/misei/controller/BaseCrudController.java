@@ -36,7 +36,7 @@ public abstract class BaseCrudController {
     }
 
     public String processDomain(String domain) {
-        String patternString = "^(?:https?://)?(?:www\\.)?(.*?)\\.(booklink\\.dev)$";
+        String patternString = "^(?:https?://)?(?:www\\.)?(.*?)\\.(booklink\\.app)$";
         Pattern pattern = Pattern.compile(patternString);
 
         Matcher matcher = pattern.matcher(domain);

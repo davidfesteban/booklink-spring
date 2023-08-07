@@ -32,6 +32,7 @@ public class AuthController {
     private JwtTokenProvider tokenProvider;
     private MailService mailService;
 
+    //TODO: Re-route message errors through header
     @GetMapping("/login")
     public ResponseEntity<String> authenticateUser(String email, String password) {
         try {
@@ -67,7 +68,7 @@ public class AuthController {
 
     @PostMapping("/join")
     public ResponseEntity<?> registerUser(@RequestBody UserPayload userPayload) {
-
+        //TODO: Add antispam
         if (authRepository.existsByEmail(userPayload.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }

@@ -50,7 +50,7 @@ public class AuthController {
             }
             return ResponseEntity.ok(savedToken.get());
         } catch (Exception e) {
-            return new ResponseEntity<>("Bad authentication!. I am a teapot", HttpStatus.I_AM_A_TEAPOT);
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).header("Message", e.getMessage()).build();
         }
     }
 
@@ -60,15 +60,15 @@ public class AuthController {
             var user = userInMemoryWaiting.confirm(UUID.fromString(uuid));
             authRepository.save(new JoinToUserMapper(passwordEncoder).apply(user));
         } catch (Exception e) {
-            return new ResponseEntity<>("Error on signup!", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).header("Message", e.getMessage()).build();
         }
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/join")
     public ResponseEntity<?> registerUser(@RequestBody UserPayload userPayload) {
-        //TODO: Add antispam
+        //TODO: Add antispam, maybe as a filter
         if (authRepository.existsByEmail(userPayload.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
@@ -78,9 +78,9 @@ public class AuthController {
             mailService.sendConfirmationMessage(userPayload.getEmail(),
                     "http://localhost:8080/api/public/auth/confirm?uuid=" + confirmationToken.toString());
         } catch (Exception e) {
-            return new ResponseEntity<>("Error on signup!", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).header("Message", e.getMessage()).build();
         }
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return ResponseEntity.ok("Check your email");
     }
 }

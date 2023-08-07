@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/public/user")
+@RequestMapping("/api/private/user")
 public class UserCrudController extends BaseCrudController {
 
     private final UserProcessor userProcessor;

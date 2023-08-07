@@ -23,9 +23,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws IOException, ServletException {
         try {
-            //TODO: Delete case of business details
-            if(httpServletRequest.getRequestURL().toString().contains("/api/private") &&  //Comment this line afterwards
-                !httpServletRequest.getRequestURL().toString().contains("/api/private/business/details")) {
+            if (httpServletRequest.getRequestURL().toString().contains("/api/private")) {
                 String token = jwtTokenProvider.resolveToken(httpServletRequest);
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
                 authenticationManager.authenticate(auth);

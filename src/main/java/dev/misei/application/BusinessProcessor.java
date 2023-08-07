@@ -16,6 +16,14 @@ public class BusinessProcessor extends BaseProcessor {
         super(businessRepository, appointmentRepository, authRepository);
     }
 
+    public BusinessPayload findBusiness(String subdomain) {
+        return BusinessMapper.INSTANCE.toPayload(businessRepository.findBySubdomainIgnoreCase(subdomain).orElseThrow(BooklinkException.Type.UNKNOWN_SUBDOMAIN::boom));
+    }
+
+    public BusinessPayload findBusinessByAppointmentId(String id) {
+        return BusinessMapper.INSTANCE.toPayload(businessRepository.findByAppointments_IdIgnoreCase(id).orElseThrow(BooklinkException.Type.UNKNOWN_SUBDOMAIN::boom));
+    }
+
     public BusinessPayload createBusiness(BusinessPayload businessPayload, User user) {
         var business = BusinessMapper.INSTANCE.toEntity(businessPayload);
 
@@ -29,10 +37,6 @@ public class BusinessProcessor extends BaseProcessor {
         authRepository.save(user);
 
         return BusinessMapper.INSTANCE.toPayload(businessRepository.save(business));
-    }
-
-    public BusinessPayload findBusiness(String subdomain) {
-        return BusinessMapper.INSTANCE.toPayload(businessRepository.findBySubdomainIgnoreCase(subdomain).orElseThrow(BooklinkException.Type.UNKNOWN_SUBDOMAIN::boom));
     }
 
     public BusinessPayload modifyBusinessDetails(BusinessPayload businessPayload, User user) {

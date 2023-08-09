@@ -26,22 +26,13 @@ public class BusinessCrudController extends BaseCrudController {
 
     @PostMapping("/private/business/modify")
     public ResponseEntity<BusinessPayload> modifyBusinessDetails(@RequestBody BusinessPayload businessPayload, @RequestHeader("Authorization") String tokenRequest) {
-        return perform(userEmail -> businessProcessor.modifyBusinessDetails(businessPayload, userEmail), tokenRequest);
+        return perform(user -> businessProcessor.modifyBusinessDetails(businessPayload, user), tokenRequest);
     }
 
     @GetMapping("/public/business/details")
     public ResponseEntity<BusinessPayload> findBusinessDetails(String host) {
         try {
             return ResponseEntity.ok(businessProcessor.findBusiness(processDomain(host)));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).header("Message", e.getMessage()).build();
-        }
-    }
-
-    @GetMapping("/public/business/detailsByAppointment")
-    public ResponseEntity<BusinessPayload> findBusinessDetailsByAppointmentId(String id) {
-        try {
-            return ResponseEntity.ok(businessProcessor.findBusiness(processDomain(id)));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).header("Message", e.getMessage()).build();
         }

@@ -2,12 +2,18 @@ package dev.misei.application;
 
 import dev.misei.domain.BooklinkException;
 import dev.misei.domain.entity.User;
+import dev.misei.domain.mapper.AppointmentMapper;
 import dev.misei.domain.mapper.BusinessMapper;
+import dev.misei.domain.mapper.UserMapper;
+import dev.misei.domain.payload.AppointmentPayload;
 import dev.misei.domain.payload.BusinessPayload;
 import dev.misei.repository.AppointmentRepository;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.BusinessRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class BusinessProcessor extends BaseProcessor {
@@ -17,11 +23,18 @@ public class BusinessProcessor extends BaseProcessor {
     }
 
     public BusinessPayload findBusiness(String subdomain) {
-        return BusinessMapper.INSTANCE.toPayload(businessRepository.findBySubdomainIgnoreCase(subdomain).orElseThrow(BooklinkException.Type.UNKNOWN_SUBDOMAIN::boom));
-    }
+        var payload = BusinessMapper.INSTANCE.toPayload(businessRepository.findBySubdomainIgnoreCase(subdomain).orElseThrow(BooklinkException.Type.UNKNOWN_SUBDOMAIN::boom));
 
-    public BusinessPayload findBusinessByAppointmentId(String id) {
-        return BusinessMapper.INSTANCE.toPayload(businessRepository.findByAppointments_IdIgnoreCase(id).orElseThrow(BooklinkException.Type.UNKNOWN_SUBDOMAIN::boom));
+        payload.setAppointments(payload.getAppointments().stream().map(new Function<AppointmentPayload, AppointmentPayload>() {
+            @Override
+            public AppointmentPayload apply(AppointmentPayload appointmentPayload) {
+                return AppointmentMapper.INSTANCE.enrichWith(UserMapper.INSTANCE.toPayload(authRepository.findByAppointments_IdIgnoreCase(
+                        appointmentPayload.getId()).orElseThrow(BooklinkException.Type.APPOINTMENT_ID_NOT_FOUND::boom)), appointmentPayload);
+            }
+        }).collect(Collectors.toSet()));
+
+        return payload;
+
     }
 
     public BusinessPayload createBusiness(BusinessPayload businessPayload, User user) {

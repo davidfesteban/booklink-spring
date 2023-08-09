@@ -12,9 +12,6 @@ import dev.misei.repository.BusinessRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
 
 @Service
 public class AppointmentProcessor extends BaseProcessor {
@@ -51,10 +48,10 @@ public class AppointmentProcessor extends BaseProcessor {
 
     public AppointmentPayload removeAppointment(String id, User user) {
         var business = businessRepository.findByAppointments_IdIgnoreCase(id).orElseThrow(BooklinkException.Type.BUSINESS_NOT_FOUND::boom);
-        var appointment = appointmentRepository.findById(id).orElseThrow(BooklinkException.Type.APPOINTMENT_ID_NOT_FOUND::boom);
-        var userRegistered = authRepository.findByAppointments_Id(id).orElseThrow(BooklinkException.Type.USER_FOR_APPOINTMENT_NOT_FOUND::boom);
+        var appointment = appointmentRepository.findByIdIgnoreCase(id).orElseThrow(BooklinkException.Type.APPOINTMENT_ID_NOT_FOUND::boom);
+        var userRegistered = authRepository.findByAppointments_IdIgnoreCase(id).orElseThrow(BooklinkException.Type.USER_FOR_APPOINTMENT_NOT_FOUND::boom);
 
-        if(!userRegistered.getEmail().equalsIgnoreCase(user.getEmail()) || user.getBusiness() == null || !user.getBusiness().getSubdomain().equalsIgnoreCase(business.getSubdomain())) {
+        if (!userRegistered.getEmail().equalsIgnoreCase(user.getEmail()) || user.getBusiness() == null || !user.getBusiness().getSubdomain().equalsIgnoreCase(business.getSubdomain())) {
             throw BooklinkException.Type.USER_NOT_ADMIN.boom();
         }
 

@@ -14,10 +14,15 @@ public class AppointmentPayload {
     private String id;
     private String slotOwner;
     private LocalDateTime slotStartAppointment;
+
     //Minutes
     private Long slotDuration;
     private String slotService;
 
     private String manualBookingInfoByAdmin;
     private String manualBookingInviteToJoin;
+
+    //Manually mapped
+    private BusinessPayload businessPayload;
+    private UserPayload userPayload;
 }

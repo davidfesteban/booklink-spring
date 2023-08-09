@@ -45,6 +45,16 @@ public class BooklinkSystemTest extends BaseContainerizedTest {
     }
 
     @Test
+    void simpleTokenValid() throws Exception {
+        var headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6InBhc3N3b3JkIiwiZW1haWwiOiJkYXZpZEBtaXNlaS5kZXYiLCJpYXQiOjE2OTE2MTEwOTUsImV4cCI6MTY5MTYzOTg5NX0.xhm8lNaDTCQ3je4JpRirqdD12gbneT7MAWkpieYw6m6H1QTwonLXpGAfhtA3vTcsHgGrSEXwu5H8Imons5gumg");
+
+        this.mvc.perform(get("/api/private/user/isValidToken")
+                .contentType(MediaType.APPLICATION_JSON)
+                .headers(headers)).andReturn();
+    }
+
+    @Test
     void simpleAdminAndUserAndAppointment() throws Exception {
         MvcResult joinUser = this.mvc.perform(post("/api/public/auth/join")
                 .content(testData.joinDavid.getContentAsString(StandardCharsets.UTF_8))

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableMongoRepositories
 public class BooklinkApplication {
-
+    //TODO: Keep a reference to each appointment in memory and delete each day.
     public static void main(String[] args) {
         SpringApplication.run(BooklinkApplication.class, args);
     }

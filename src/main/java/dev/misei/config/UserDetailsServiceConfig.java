@@ -1,6 +1,5 @@
 package dev.misei.config;
 
-import dev.misei.domain.entity.User;
 import dev.misei.repository.AuthRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;

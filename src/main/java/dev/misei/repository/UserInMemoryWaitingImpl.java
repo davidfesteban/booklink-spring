@@ -1,7 +1,5 @@
 package dev.misei.repository;
 
-import dev.misei.domain.entity.User;
-import dev.misei.domain.payload.UserPayload;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

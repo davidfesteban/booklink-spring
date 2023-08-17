@@ -1,13 +1,10 @@
 package dev.misei;
 
-import dev.misei.domain.WorkingHours;
-import dev.misei.domain.entity.Appointment;
-import dev.misei.domain.entity.Business;
-import dev.misei.domain.entity.User;
+import dev.misei.domain.business.OpeningHoursByDay;
+import dev.misei.domain.business.Business;
 import dev.misei.repository.AuthRepository;
 import dev.misei.repository.BusinessRepository;
 import org.jetbrains.annotations.TestOnly;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,7 +32,7 @@ public class AutofillMongoTestData {
     @Test
     void addUsers() {
 
-        var workingHours = new WorkingHours(LocalTime.of(8, 0), LocalTime.of(16, 0), LocalTime.of(12, 0), LocalTime.of(13, 0));
+        var workingHours = new OpeningHoursByDay(LocalTime.of(8, 0), LocalTime.of(16, 0), LocalTime.of(12, 0), LocalTime.of(13, 0));
 
         var business = new Business();
         business.setName("peluqueria");

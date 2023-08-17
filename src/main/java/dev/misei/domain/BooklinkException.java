@@ -1,7 +1,5 @@
 package dev.misei.domain;
 
-import java.util.function.Supplier;
-
 public class BooklinkException extends RuntimeException {
     public BooklinkException(String message) {
         super(message);

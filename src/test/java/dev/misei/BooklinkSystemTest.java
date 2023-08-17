@@ -1,6 +1,5 @@
 package dev.misei;
 
-import dev.misei.application.MailService;
 import dev.misei.config.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

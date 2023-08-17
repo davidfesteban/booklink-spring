@@ -1,6 +1,6 @@
 package dev.misei.repository;
 
-import dev.misei.domain.entity.Business;
+import dev.misei.domain.business.Business;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;

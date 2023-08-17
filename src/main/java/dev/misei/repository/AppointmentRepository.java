@@ -1,6 +1,5 @@
 package dev.misei.repository;
 
-import dev.misei.domain.entity.Appointment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

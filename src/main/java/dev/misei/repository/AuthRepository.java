@@ -1,7 +1,6 @@
 package dev.misei.repository;
 
 import com.mongodb.lang.NonNull;
-import dev.misei.domain.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

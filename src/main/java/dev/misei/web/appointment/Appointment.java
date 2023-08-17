@@ -1,6 +1,7 @@
 package dev.misei.web.appointment;
 
-import dev.misei.web.business.TimeInterval;
+
+import dev.misei.domain.core.TimeInterval;
 
 import java.time.LocalDate;
 import java.util.UUID;

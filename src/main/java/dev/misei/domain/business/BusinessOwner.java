@@ -2,9 +2,12 @@ package dev.misei.domain.business;
 
 import dev.misei.domain.user.User;
 
+import java.util.UUID;
+
 public class BusinessOwner {
 
-    User user;
-    Business business;
+    private  UUID id;
+    private User user;
+    private  Business business;
 
 }

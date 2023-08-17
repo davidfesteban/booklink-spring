@@ -1,11 +1,12 @@
 package dev.misei.domain.booking;
 
+import dev.misei.domain.ConflictException;
 import dev.misei.domain.appointment.Appointment;
 import dev.misei.domain.business.DeviatingHours;
 import dev.misei.domain.business.OpeningHours;
 import dev.misei.domain.business.OpeningHoursByDay;
-import dev.misei.domain.core.TimeInterval;
 import dev.misei.domain.core.Entity;
+import dev.misei.domain.core.TimeInterval;
 import lombok.Getter;
 
 import java.time.LocalDate;
@@ -24,11 +25,11 @@ public class Slot extends Entity {
     public Appointment createAppointment(UUID customerId, LocalDate localDate, TimeInterval timeInterval, String description) {
 
         if (isConflictingWithOtherAppointment(localDate, timeInterval)) {
-            // Exception
+            throw new ConflictException("There is a conflicting appointment");
         }
 
         if (!fitsIntoInterval(localDate, timeInterval)) {
-            // Exception
+            throw new ConflictException("No slot available for this time");
         }
 
         Appointment appointment = new Appointment(customerId, description, timeInterval, localDate);

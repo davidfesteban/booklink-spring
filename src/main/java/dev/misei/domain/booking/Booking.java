@@ -19,12 +19,12 @@ public class Booking extends AbstractAggregateRoot<Booking> {
 
     public Appointment createAppointment(UUID slotId, LocalDate localDate, TimeInterval timeInterval, String description, UUID customerId) {
         var slotFound = slots.stream().filter(slot -> slot.getId().equals(slotId)).findFirst().orElseThrow();
-        Appointment appointment = slotFound.createAppointment(customerId, localDate, timeInterval, description);
-        registerEvent(new Events.AppointmentCreated(appointment.getId()));
+        var appointment = slotFound.createAppointment(customerId, localDate, timeInterval, description);
+        registerEvent(new Events.AppointmentCreated(appointment.getId(), appointment.getCustomerId()));
         return appointment;
     }
 
     static class Events {
-        record AppointmentCreated(UUID id){}
+        record AppointmentCreated(UUID id, UUID customerId){}
     }
 }
